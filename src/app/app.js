@@ -28,7 +28,7 @@ export default class App extends React.Component {
     }
     playerMoved(i, value) {
         if (value === 1 || value === 2) return;
-
+        if (this.state.game.winner) return;
         const newState = makeMove(this.state.game, i);
         this.setState({ game: newState });
     }
@@ -37,16 +37,17 @@ export default class App extends React.Component {
         this.setState (this.state.game = newGame());
     }
 
-
   render(){
     return (
         <div>
+            <h2>TiccaTaccaToe</h2>
             <Message showCurrentGameMessage={this.state.game}/>
       <div className='board'>{this.state.game.board.map((tile, index) =>
-          <Tile value={tile} playerMoved={() => this.playerMoved(index, tile)} />)}
+          <Tile value={tile} win={this.state.game.line.includes(index)} playerMoved={() => this.playerMoved(index, tile)} />)}
       </div>
             <button onClick={() => this.resetGame()}>Reset</button>
         </div>
     );
   }
 }
+

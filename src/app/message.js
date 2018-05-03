@@ -21,7 +21,15 @@ export default function Message(props)  {
 
     };
 
-if (props.showCurrentGameMessage.board.includes(0) === false) {
+if (props.showCurrentGameMessage.winner === 1 || props.showCurrentGameMessage.winner === 2) {
+    if(props.showCurrentGameMessage.winner === 1) {
+        currentMessage = gameMessage.player1Won
+    } else {
+        currentMessage = gameMessage.player2Won
+    }
+}
+
+else if (props.showCurrentGameMessage.board.includes(0) === false) {
     currentMessage = gameMessage.draw
     }
     else {
